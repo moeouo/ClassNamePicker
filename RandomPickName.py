@@ -461,15 +461,15 @@ class PickName:
         if latest_version != self.version:
             if latest_version == '99.99.99':
                 self.root.title(
-                    "【检查更新失败】点名程序(81专用) - 版本:{} - 编译日期:{}".format(self.version, self.version_time))
+                    "【检查更新失败】点名程序 - 版本:{} - 编译日期:{}".format(self.version, self.version_time))
             else:
                 self.root.title(
-                    "【发现新版本-{}-{}】点名程序(81专用) - 版本:{} - 编译日期:{}".format(
+                    "【发现新版本-{}-{}】点名程序 - 版本:{} - 编译日期:{}".format(
                         latest_version, latest_version_info, self.version, self.version_time))
                 self.root.geometry("1000x490")
         else:
             self.root.title(
-                "【已是最新版本】点名程序(81专用) - 版本:{} - 编译日期:{}".format(self.version, self.version_time))
+                "【已是最新版本】点名程序 - 版本:{} - 编译日期:{}".format(self.version, self.version_time))
             self.root.geometry("700x490")
 
     def about_msgbox(self):
@@ -487,11 +487,9 @@ class PickName:
             latest_version = '检测失败'
             latest_version_info = '获取更新失败'
 
-        if messagebox.askyesno('关于本程序', '项目Github地址:https://github.com/Chengzi600/RandomPickName\n'
-                                             '作者:Chengzi600\n\n'
+        if messagebox.askyesno('关于本程序', '项目Github地址:https://github.com/Chengzi600/RandomPickName\n\n'
                                              '检查更新:\n'
                                              '当前最新版本:{}\n最新版本信息:\n{}\n\n'
-                                             '由于作者是学生，一般不太会更新，请多多包容!\n\n'
                                              '单击“是”打开 Github Releases 界面下载最新版本'.format(latest_version,
                                                                                                     latest_version_info)):
             webbrowser.open("https://github.com/Chengzi600/RandomPickName/releases")
