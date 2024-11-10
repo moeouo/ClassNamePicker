@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'C:\Users\15573\Desktop\untitled.ui'
+# Form implementation generated from reading ui file 'pyqt5ui.ui'
 #
 # Created by: PyQt5 UI code generator 5.15.9
 #
@@ -213,6 +213,7 @@ class Ui_MainWindow(object):
         font.setFamily("宋体")
         font.setPointSize(12)
         self.groupBox.setFont(font)
+        self.groupBox.setTitle("")
         self.groupBox.setAlignment(QtCore.Qt.AlignCenter)
         self.groupBox.setObjectName("groupBox")
         self.horizontalLayoutWidget = QtWidgets.QWidget(self.groupBox)
@@ -345,7 +346,6 @@ class Ui_MainWindow(object):
         self.name_label.setText(_translate("MainWindow", "请抽取"))
         self.pick_name_button.setText(_translate("MainWindow", ">>> 抽取 <<<"))
         self.reset_button.setText(_translate("MainWindow", "重置名单"))
-        self.groupBox.setTitle(_translate("MainWindow", "->配置区<-"))
         self.n_pick_checkbox.setText(_translate("MainWindow", "均衡模式"))
         self.g_names_pick_checkbox.setText(_translate("MainWindow", "只抽女生"))
         self.b_names_pick_checkbox.setText(_translate("MainWindow", "只抽男生"))
@@ -357,6 +357,5 @@ class Ui_MainWindow(object):
         self.timer_label.setText(_translate("MainWindow", "0.0s"))
         self.menu_about.setTitle(_translate("MainWindow", "关于"))
         self.update_action.setText(_translate("MainWindow", "检查更新"))
-        self.about_action.setText(_translate("MainWindow", "\n"
-"程序简介"))
-        self.github_action.setText(_translate("MainWindow", "打开 Github 页面"))
+        self.about_action.setText(_translate("MainWindow", "程序简介"))
+        self.github_action.setText(_translate("MainWindow", "打开 Github 仓库"))

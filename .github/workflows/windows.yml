@@ -1,9 +1,9 @@
-name: RandomPickName for Windows
+name: ClassNamePicker Build
 
 on:
   push:
     branches:
-      - master  # 这里修改为你的主分支名，如 master
+      - master
 
 jobs:
   build:
@@ -13,41 +13,27 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v2
 
-    - name: Set up Python
+    - name: Setup Python
       uses: actions/setup-python@v2
       with:
-          python-version: '3.x'  # 指定你的 Python 版本
+          python-version: '3.9'
 
     - name: Install dependencies
       run: |
         pip install pyinstaller
-        pip install requests
-
-
-    # - name: PyInstaller Action
-    #   uses: Martin005/pyinstaller-action@v1.2.0
-    #   with:
-    #       python_ver: '3.9'
-    #       spec: 'dianming.py'
-    #       upload_exe_with_name: 'RandomPickName ZIP'
-    #       options: --onedir, --name "RandomPickName", --windowed, 
-            
+        pip install -r requirements.txt
 
     - name: Build executable
       run: |
-        pyinstaller -D -w -n RandomPickName RandomPickName.py
-
+        pyinstaller -D -w -n ClassNamePicker ClassNamePicker.py
 
     - name: Zip executable
       run: |
-        Compress-Archive -Path dist\RandomPickName -DestinationPath RandomPickName.zip
-
+        Compress-Archive -Path dist\ClassNamePicker -DestinationPath ClassNamePicker.zip
 
     - name: Upload artifacts
       uses: actions/upload-artifact@v2
       with:
-        name: RandomPickNameEXE
+        name: ClassNamePicker
         path: |
-          RandomPickName.zip
-
-        
+          ClassNamePicker.zip

@@ -3,14 +3,14 @@
 <div align="center">
 
 # ClassNamePicker
-## 划时代的课堂工具 :airplane:  | 课堂随机点名 :zap: 
+## 实用课堂工具 :airplane:  | 课堂随机点名 :zap: 
 
 [![Stars](https://img.shields.io/github/stars/Chengzi600/RandomPickName?label=Stars)](https://github.com/ClassIsland/ClassIsland)
 [![Release](https://img.shields.io/github/v/release/Chengzi600/RandomPickName?style=flat-square&color=%233fb950&label=正式版)](https://github.com/ClassIsland/ClassIsland/releases/latest)
 [![下载量](https://img.shields.io/github/downloads/Chengzi600/RandomPickName/total?style=social&label=下载量&logo=github)](https://github.com/ClassIsland/ClassIsland/releases/latest)
 
 ClassNamePicker 是一款功能强大的课堂随机点名工具<br/>
-使用 Python + PyQt5 编写，界面简洁
+使用 PyQt5 编写，界面简洁
 </div>
 
 ## 功能
@@ -58,18 +58,20 @@ ClassNamePicker 是一款功能强大的课堂随机点名工具<br/>
 
 先启动一次程序，然后进入同级目录下`PickNameConfig`文件夹，编辑`names.txt`，每行填写一个名字，不要有空行（可从含有学生名字的表格中直接复制名字一列），然后可选择编辑`g_names.txt`，即为女生名单，男生名单将自动算出
 
-如你有 Python 环境，可以直接拉取项目，安装依赖（`requirements.txt`）运行，速度更快
+如您有 Python 环境，可以直接拉取项目，安装依赖（`pip install -r requirements.txt`）并运行`ClassNamePicker.py`，速度更快
 
 ### 升级教程
  **一般来说，直接将新版本解压，然后将旧版本的配置文件夹`PickNameConfig`复制到解压出来的文件夹内即可** 
 
 对于大版本更新，不能与新版本配置文件适配，则需要手动删除软件配置文件`config.json`
 
-此方法也可以解决意外导致配置文件无法读取的情况，统计信息和上次保存的名字记录将被清空，如你会阅读json文件，可自行备份
+此方法也可以解决意外导致配置文件无法读取的情况，统计信息和上次保存的名字记录将被清空，如您会阅读json文件，可自行备份
 
 ## 获取帮助
 
-如果你确定遇到的问题是一个 **Bug**，或者要提出一项**新的功能**，请提交 Issue
+如果您确定遇到的问题是一个 **Bug**，或者要提出一项**新的功能**，请提交 Issue
+
+或联系作者: **QQ:2752718571**
 
 ## 开发
 
@@ -91,7 +93,7 @@ ClassNamePicker 是一款功能强大的课堂随机点名工具<br/>
 
 ## 许可证
 
-本项目基于 [MIT License](LICENSE.txt) 获得许可。
+本项目基于 [MIT License](LICENSE) 获得许可
 
 ## Stars 历史
 

@@ -8,14 +8,14 @@ import webbrowser
 
 from ui import Ui_MainWindow
 from PyQt5.QtWidgets import *
-from PyQt5.QtCore import QTimer
+from PyQt5.QtCore import QTimer, Qt
 
 
 class PickName(QMainWindow, Ui_MainWindow):
     def __init__(self):
         # 版本信息
-        self.version = 'v1.4.1'
-        self.version_time = '2024.11.9'
+        self.version = '1.4.1_pre'
+        self.version_time = '2024.11.10'
         self.version_info = ''
         self.config_version = '1.1.3'
 
@@ -52,6 +52,10 @@ class PickName(QMainWindow, Ui_MainWindow):
         self.setupUi(self)  # 使用UI设置界面
         self.setWindowTitle(
             "课堂随机点名{}- ClassNamePicker - v{}({})".format(self.version_info, self.version, self.version_time))
+        # 禁止调整窗口大小
+        self.setFixedSize(self.size())  # 使窗口大小固定
+        # 禁用最大化按钮
+        self.setWindowFlags(self.windowFlags() & ~Qt.WindowMaximizeButtonHint)
 
         # 抽取名字按钮
         self.pick_name_button.clicked.connect(self.pick_name)
@@ -74,7 +78,7 @@ class PickName(QMainWindow, Ui_MainWindow):
         self.pick_again_checkbox.stateChanged.connect(self.set_pick_again)
 
         # 复选框，是否显示动画
-        self.pick_animation_checkbox.stateChanged.connect(self.set_animation)
+        self.pick_animation_checkbox.toggled.connect(self.set_animation)
 
         # 链接 Action
         self.about_action.triggered.connect(self.about_menu)
@@ -122,6 +126,7 @@ class PickName(QMainWindow, Ui_MainWindow):
                                             '配置文件需要更新! 该版本的配置文件格式与当前不符\n请删除本程序的配置文件config.json，然后重启程序！')
                         sys.exit('CONFIG_OUT_OF_DATE')
 
+                    self.block_signals()
                     self.is_save = config['is_save']
                     self.is_save_checkbox.setChecked(self.is_save)
                     self.pick_again = config['pick_again']
@@ -131,6 +136,7 @@ class PickName(QMainWindow, Ui_MainWindow):
                     self.picked_count = config['picked_count']
                     self.pick_again_checkbox.setChecked(self.pick_again)
                     self.pick_animation_checkbox.setChecked(self.animation)
+                    self.block_signals(False)
 
             except FileNotFoundError as e:
                 with open(file_dir, 'w+', encoding='utf-8') as config_file:
@@ -149,7 +155,8 @@ class PickName(QMainWindow, Ui_MainWindow):
                 sys.exit('CREATED_CONFIG_SUCCESSFULLY')
         except Exception as e:
             QMessageBox.critical(self, '错误',
-                                 '配置文件创建或读取错误!\n请检查程序是否有对当前文件夹的读写权限\n或尝试删除配置文件夹中的config.json')
+                                 '配置文件创建或读取错误!\n请检查程序是否有对当前文件夹的读写权限\n或尝试删除配置文件夹中的config.json\n错误信息:' + str(
+                                     e))
             print("错误信息:", e)
             sys.exit('FAILED_TO_LOAD_CONFIG')
 
@@ -205,6 +212,7 @@ class PickName(QMainWindow, Ui_MainWindow):
             self.is_save = False
 
     def set_pick_group_g(self):
+        self.block_signals(True)
         if not self.pick_only_g:
             if QMessageBox.question(self, "继续吗",
                                     "该操作将清空已抽取的名字，继续吗？\n 这次将无法再使用重复抽取功能，如有需要请重启",
@@ -220,8 +228,10 @@ class PickName(QMainWindow, Ui_MainWindow):
                 self.g_names_pick_checkbox.setCheckState(False)
         else:
             self.set_pick_group('clear')
+        self.block_signals(False)
 
     def set_pick_group_b(self):
+        self.block_signals()
         if not self.pick_only_b:
             if QMessageBox.question(self, "继续吗",
                                     "该操作将清空已抽取的名字，继续吗？\n 这次将无法再使用重复抽取功能，如有需要请重启",
@@ -233,10 +243,12 @@ class PickName(QMainWindow, Ui_MainWindow):
                 self.set_pick_group('b')
                 self.can_pick_names = self.b_names.copy()
                 self.update_stats()
+
             else:
                 self.b_names_pick_checkbox.setCheckState(False)
         else:
             self.set_pick_group('clear')
+        self.block_signals(False)
 
     def set_pick_group(self, ab):
         # 如果两个复选框都被选中，则取消另一个的选中状态
@@ -266,7 +278,7 @@ class PickName(QMainWindow, Ui_MainWindow):
             QMessageBox.information(self, "提示", "所有名字已抽取完毕，请重置名单")
             self.name_label.setText("请重置")
             self.name_label.setStyleSheet("color: red")
-            self.reset_button.config.setDisabled(False)
+            self.reset_button.setDisabled(False)
             return
 
         self.selected_name = random.choice(self.can_pick_names)
@@ -312,6 +324,7 @@ class PickName(QMainWindow, Ui_MainWindow):
             QTimer.singleShot(100, self.update_timer)
 
     def reset(self, no_tip=False):
+        self.block_signals()
         def perform_reset():
             if self.is_running:
                 self.is_running = False
@@ -333,6 +346,7 @@ class PickName(QMainWindow, Ui_MainWindow):
             if reply == QMessageBox.Yes:
                 perform_reset()
                 QMessageBox.information(self, "提示", "已清空已抽取名单!")
+        self.block_signals(False)
 
     def pick_animation(self):
         if len(self.can_pick_names) <= 2:
@@ -411,13 +425,23 @@ class PickName(QMainWindow, Ui_MainWindow):
     def github_menu():
         webbrowser.open("https://github.com/Chengzi600/ClassNamePicker/releases")
 
-    def on_closing(self):
+    def closeEvent(self, event):
         if self.pick_only_g or self.pick_only_b or self.pick_again:
             self.reset(no_tip=True)
-            self.close()
+            QApplication.quit()
         else:
             self.save_config()
-            self.close()
+            QApplication.quit()
+
+    def block_signals(self, state=True):
+        if state:
+            self.b_names_pick_checkbox.stateChanged.disconnect()
+            self.pick_again_checkbox.stateChanged.disconnect()
+            self.g_names_pick_checkbox.stateChanged.disconnect()
+        else:
+            self.b_names_pick_checkbox.stateChanged.connect(self.set_pick_group_b)
+            self.g_names_pick_checkbox.stateChanged.connect(self.set_pick_group_g)
+            self.pick_again_checkbox.stateChanged.connect(self.set_pick_again)
 
 
 if __name__ == "__main__":
