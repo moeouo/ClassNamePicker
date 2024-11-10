@@ -5,6 +5,7 @@ import sys
 import time
 import requests
 import webbrowser
+import pyttsx3
 
 from ui import Ui_MainWindow
 from PyQt5.QtWidgets import *
@@ -14,10 +15,10 @@ from PyQt5.QtCore import QTimer, Qt
 class PickName(QMainWindow, Ui_MainWindow):
     def __init__(self):
         # 版本信息
-        self.version = '1.4.1_pre'
+        self.version = '1.4.1'
         self.version_time = '2024.11.10'
         self.version_info = ''
-        self.config_version = '1.1.3'
+        self.config_version = '1.1.4'
 
         # 初始名单
         self.names = []
@@ -39,6 +40,8 @@ class PickName(QMainWindow, Ui_MainWindow):
         self.is_save = False
         self.pick_only_g = False
         self.pick_only_b = False
+        self.speak_name = False
+        self.pick_balanced = False
         self.animation_time = 1.0
         self.picked_count = 0
         self.wait_recite_time = 3
@@ -78,18 +81,45 @@ class PickName(QMainWindow, Ui_MainWindow):
         self.pick_again_checkbox.stateChanged.connect(self.set_pick_again)
 
         # 复选框，是否显示动画
-        self.pick_animation_checkbox.toggled.connect(self.set_animation)
+        self.pick_animation_checkbox.stateChanged.connect(self.set_animation)
+
+        # 复选框，是否读名字
+        self.pick_read_checkbox.stateChanged.connect(self.set_speak)
 
         # 链接 Action
         self.about_action.triggered.connect(self.about_menu)
         self.update_action.triggered.connect(self.check_update_menu)
         self.github_action.triggered.connect(self.github_menu)
 
+        # 播报
+        self.engine = pyttsx3.init()
+        # 设置语速
+        self.engine.setProperty('rate', 190)
+        # 设置音量
+        self.engine.setProperty('volume', 1.0)
+        # 设置语音合成器
+        self.engine.setProperty('voice', "3")
+
         self.read_config()
         self.update_stats()
 
     # 配置文件读取
     def read_config(self):
+        def create_config(is_upgrade=False):
+            if is_upgrade:
+                config_v['picked_count'] = self.picked_count
+            with open(file_dir, 'w+', encoding='utf-8') as config_file_c:
+                json.dump(config_v, config_file_c)
+            if not os.path.exists(names_file_dir):
+                with open(names_file_dir, 'w', encoding='utf-8') as names_file_c:
+                    names_file_c.write(example_names)
+            if not os.path.exists(g_names_file_dir):
+                with open(g_names_file_dir, 'w', encoding='utf-8') as g_names_file_c:
+                    g_names_file_c.write(g_example_names)
+            # with open(file_dir) as config_file_r:
+            # config = json.load(config_file_r)
+            # config_d = json.dumps(config, sort_keys=True, indent=4, separators=(',', ': '))
+
         try:
             os.makedirs('./PickNameConfig/', exist_ok=True)
             file_dir = r'./PickNameConfig/config.json'
@@ -104,6 +134,8 @@ class PickName(QMainWindow, Ui_MainWindow):
                 'animation': self.animation,
                 'animation_time': self.animation_time,
                 'is_save': self.is_save,
+                'speak_name': self.speak_name,
+                'pick_balanced': self.pick_balanced,
                 'picked_count': self.picked_count,
                 'config_version': self.config_version,
                 'can_pick_names': self.names,
@@ -122,9 +154,10 @@ class PickName(QMainWindow, Ui_MainWindow):
                 with open(file_dir, encoding='utf-8') as config_file:
                     config = json.load(config_file)
                     if not config['config_version'] == self.config_version:
-                        QMessageBox.warning(self, '警告',
-                                            '配置文件需要更新! 该版本的配置文件格式与当前不符\n请删除本程序的配置文件config.json，然后重启程序！')
-                        sys.exit('CONFIG_OUT_OF_DATE')
+                        self.picked_count = config['picked_count']
+                        create_config(True)
+                        QMessageBox.information(self, '提示', '配置文件更新成功!')
+                        return
 
                     self.block_signals()
                     self.is_save = config['is_save']
@@ -134,22 +167,15 @@ class PickName(QMainWindow, Ui_MainWindow):
                     self.animation_time = config['animation_time']
                     self.can_pick_names = config['can_pick_names']
                     self.picked_count = config['picked_count']
+                    self.speak_name = config['speak_name']
+                    self.pick_balanced = config['pick_balanced']
+                    self.pick_read_checkbox.setChecked(self.speak_name)
                     self.pick_again_checkbox.setChecked(self.pick_again)
                     self.pick_animation_checkbox.setChecked(self.animation)
                     self.block_signals(False)
 
             except FileNotFoundError as e:
-                with open(file_dir, 'w+', encoding='utf-8') as config_file:
-                    json.dump(config_v, config_file)
-                if not os.path.exists(names_file_dir):
-                    with open(names_file_dir, 'w', encoding='utf-8') as names_file:
-                        names_file.write(example_names)
-                if not os.path.exists(g_names_file_dir):
-                    with open(g_names_file_dir, 'w', encoding='utf-8') as g_names_file:
-                        g_names_file.write(g_example_names)
-                # with open(file_dir) as config_file_r:
-                # config = json.load(config_file_r)
-                # config_d = json.dumps(config, sort_keys=True, indent=4, separators=(',', ': '))
+                create_config()
                 QMessageBox.information(self, '提示', '配置文件夹创建成功!\n请在names.txt文件中编辑名单!')
                 print(e)
                 sys.exit('CREATED_CONFIG_SUCCESSFULLY')
@@ -169,6 +195,8 @@ class PickName(QMainWindow, Ui_MainWindow):
                 config['is_save'] = self.is_save
                 config['pick_again'] = self.pick_again
                 config['animation'] = self.animation
+                config['speak_name'] = self.speak_name
+                config['pick_balanced'] = self.pick_balanced
                 if self.is_save:
                     config['can_pick_names'] = self.can_pick_names
                 else:
@@ -210,6 +238,12 @@ class PickName(QMainWindow, Ui_MainWindow):
             self.is_save = True
         else:
             self.is_save = False
+
+    def set_speak(self):
+        if not self.speak_name:
+            self.speak_name = True
+        else:
+            self.speak_name = False
 
     def set_pick_group_g(self):
         self.block_signals(True)
@@ -290,6 +324,8 @@ class PickName(QMainWindow, Ui_MainWindow):
             self.name_label.setText(self.selected_name)
             self.pick_name_button.setDisabled(False)
             self.reset_button.setDisabled(False)
+            # if self.speak_name:
+            #     self.say(self.selected_name)
             if self.recite:
                 self.is_running = False
                 self.perform_countdown(self.wait_recite_time)
@@ -363,6 +399,8 @@ class PickName(QMainWindow, Ui_MainWindow):
             self.name_label.setText(self.selected_name)
             self.pick_name_button.setEnabled(True)
             self.reset_button.setEnabled(True)
+            if self.speak_name:
+                self.say(self.selected_name)
             if self.recite:
                 self.is_running = False
                 self.perform_countdown(self.wait_recite_time)
@@ -438,10 +476,22 @@ class PickName(QMainWindow, Ui_MainWindow):
             self.b_names_pick_checkbox.stateChanged.disconnect()
             self.pick_again_checkbox.stateChanged.disconnect()
             self.g_names_pick_checkbox.stateChanged.disconnect()
+            self.pick_animation_checkbox.stateChanged.disconnect()
+            self.pick_read_checkbox.stateChanged.disconnect()
+            self.is_save_checkbox.stateChanged.disconnect()
         else:
             self.b_names_pick_checkbox.stateChanged.connect(self.set_pick_group_b)
             self.g_names_pick_checkbox.stateChanged.connect(self.set_pick_group_g)
             self.pick_again_checkbox.stateChanged.connect(self.set_pick_again)
+            self.pick_animation_checkbox.stateChanged.connect(self.set_animation)
+            self.pick_read_checkbox.stateChanged.connect(self.set_speak)
+            self.is_save_checkbox.stateChanged.connect(self.set_save)
+
+    def say(self, text):
+        self.engine.say(text)
+        self.engine.runAndWait()
+
+
 
 
 if __name__ == "__main__":

@@ -585,6 +585,9 @@
       </property>
       <item>
        <widget class="QCheckBox" name="n_pick_checkbox">
+        <property name="enabled">
+         <bool>false</bool>
+        </property>
         <property name="font">
          <font>
           <family>宋体</family>
@@ -684,7 +687,7 @@
          </font>
         </property>
         <property name="text">
-         <string>开启播报</string>
+         <string>开启播报(测试)</string>
         </property>
        </widget>
       </item>
@@ -740,6 +743,9 @@
       </item>
       <item>
        <widget class="QCheckBox" name="checkBox_12">
+        <property name="enabled">
+         <bool>false</bool>
+        </property>
         <property name="font">
          <font>
           <family>宋体</family>
@@ -747,7 +753,7 @@
          </font>
         </property>
         <property name="text">
-         <string/>
+         <string>开发中...</string>
         </property>
        </widget>
       </item>
