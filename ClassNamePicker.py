@@ -10,13 +10,14 @@ import pyttsx3
 from ui import Ui_MainWindow
 from PyQt5.QtWidgets import *
 from PyQt5.QtCore import QTimer, Qt
+from PyQt5.QtGui import QGuiApplication
 
 
 class PickName(QMainWindow, Ui_MainWindow):
     def __init__(self):
         # 版本信息
-        self.version = '1.4.1'
-        self.version_time = '2024.11.10'
+        self.version = '1.4.2'
+        self.version_time = '2024.11.11'
         self.version_info = ''
         self.config_version = '1.1.4'
 
@@ -361,6 +362,7 @@ class PickName(QMainWindow, Ui_MainWindow):
 
     def reset(self, no_tip=False):
         self.block_signals()
+
         def perform_reset():
             if self.is_running:
                 self.is_running = False
@@ -492,9 +494,11 @@ class PickName(QMainWindow, Ui_MainWindow):
         self.engine.runAndWait()
 
 
-
-
 if __name__ == "__main__":
+    QGuiApplication.setAttribute(Qt.AA_EnableHighDpiScaling)
+    QGuiApplication.setAttribute(Qt.AA_UseHighDpiPixmaps)
+    QGuiApplication.setHighDpiScaleFactorRoundingPolicy(Qt.HighDpiScaleFactorRoundingPolicy.PassThrough)
+
     app = QApplication(sys.argv)  # 创建应用
     window = PickName()  # 创建主窗口
     window.show()  # 显示窗口
