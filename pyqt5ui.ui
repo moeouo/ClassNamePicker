@@ -9,9 +9,15 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>647</width>
-    <height>699</height>
+    <width>612</width>
+    <height>589</height>
    </rect>
+  </property>
+  <property name="sizePolicy">
+   <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+    <horstretch>0</horstretch>
+    <verstretch>0</verstretch>
+   </sizepolicy>
   </property>
   <property name="windowTitle">
    <string>MainWindow</string>
@@ -20,10 +26,10 @@
    <widget class="QWidget" name="verticalLayoutWidget">
     <property name="geometry">
      <rect>
-      <x>40</x>
-      <y>20</y>
+      <x>20</x>
+      <y>0</y>
       <width>561</width>
-      <height>341</height>
+      <height>309</height>
      </rect>
     </property>
     <layout class="QVBoxLayout" name="main_ui">
@@ -66,7 +72,7 @@
        <property name="font">
         <font>
          <family>黑体</family>
-         <pointsize>24</pointsize>
+         <pointsize>22</pointsize>
         </font>
        </property>
        <property name="styleSheet">
@@ -543,244 +549,216 @@
      </item>
     </layout>
    </widget>
-   <widget class="QGroupBox" name="groupBox">
+   <widget class="QWidget" name="verticalLayoutWidget_2">
     <property name="geometry">
      <rect>
-      <x>40</x>
-      <y>380</y>
+      <x>20</x>
+      <y>310</y>
       <width>561</width>
-      <height>211</height>
+      <height>171</height>
      </rect>
     </property>
-    <property name="font">
-     <font>
-      <family>宋体</family>
-      <pointsize>12</pointsize>
-     </font>
-    </property>
-    <property name="title">
-     <string/>
-    </property>
-    <property name="alignment">
-     <set>Qt::AlignCenter</set>
-    </property>
-    <widget class="QWidget" name="horizontalLayoutWidget">
-     <property name="geometry">
-      <rect>
-       <x>0</x>
-       <y>10</y>
-       <width>561</width>
-       <height>61</height>
-      </rect>
-     </property>
-     <layout class="QHBoxLayout" name="config_ui_1">
-      <property name="spacing">
-       <number>7</number>
-      </property>
-      <property name="sizeConstraint">
-       <enum>QLayout::SetDefaultConstraint</enum>
-      </property>
-      <property name="leftMargin">
-       <number>50</number>
-      </property>
-      <item>
-       <widget class="QCheckBox" name="n_pick_checkbox">
-        <property name="enabled">
-         <bool>false</bool>
-        </property>
-        <property name="font">
-         <font>
-          <family>宋体</family>
-          <pointsize>12</pointsize>
-         </font>
-        </property>
-        <property name="layoutDirection">
-         <enum>Qt::LeftToRight</enum>
-        </property>
-        <property name="text">
-         <string>均衡模式</string>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QCheckBox" name="g_names_pick_checkbox">
-        <property name="font">
-         <font>
-          <family>宋体</family>
-          <pointsize>12</pointsize>
-         </font>
-        </property>
-        <property name="text">
-         <string>只抽女生</string>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QCheckBox" name="b_names_pick_checkbox">
-        <property name="font">
-         <font>
-          <family>宋体</family>
-          <pointsize>12</pointsize>
-         </font>
-        </property>
-        <property name="text">
-         <string>只抽男生</string>
-        </property>
-       </widget>
-      </item>
-     </layout>
-    </widget>
-    <widget class="QWidget" name="horizontalLayoutWidget_2">
-     <property name="geometry">
-      <rect>
-       <x>0</x>
-       <y>70</y>
-       <width>561</width>
-       <height>61</height>
-      </rect>
-     </property>
-     <layout class="QHBoxLayout" name="config_ui_2">
-      <property name="spacing">
-       <number>7</number>
-      </property>
-      <property name="sizeConstraint">
-       <enum>QLayout::SetDefaultConstraint</enum>
-      </property>
-      <property name="leftMargin">
-       <number>50</number>
-      </property>
-      <item>
-       <widget class="QCheckBox" name="pick_again_checkbox">
-        <property name="font">
-         <font>
-          <family>宋体</family>
-          <pointsize>12</pointsize>
-         </font>
-        </property>
-        <property name="layoutDirection">
-         <enum>Qt::LeftToRight</enum>
-        </property>
-        <property name="text">
-         <string>允许重复抽取</string>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QCheckBox" name="pick_time_checkbox">
-        <property name="font">
-         <font>
-          <family>宋体</family>
-          <pointsize>12</pointsize>
-         </font>
-        </property>
-        <property name="text">
-         <string>计时器</string>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QCheckBox" name="pick_read_checkbox">
-        <property name="font">
-         <font>
-          <family>宋体</family>
-          <pointsize>12</pointsize>
-         </font>
-        </property>
-        <property name="text">
-         <string>开启播报(测试)</string>
-        </property>
-       </widget>
-      </item>
-     </layout>
-    </widget>
-    <widget class="QWidget" name="horizontalLayoutWidget_3">
-     <property name="geometry">
-      <rect>
-       <x>0</x>
-       <y>130</y>
-       <width>561</width>
-       <height>61</height>
-      </rect>
-     </property>
-     <layout class="QHBoxLayout" name="config_ui_3">
-      <property name="spacing">
-       <number>7</number>
-      </property>
-      <property name="sizeConstraint">
-       <enum>QLayout::SetDefaultConstraint</enum>
-      </property>
-      <property name="leftMargin">
-       <number>50</number>
-      </property>
-      <item>
-       <widget class="QCheckBox" name="pick_animation_checkbox">
-        <property name="font">
-         <font>
-          <family>宋体</family>
-          <pointsize>12</pointsize>
-         </font>
-        </property>
-        <property name="layoutDirection">
-         <enum>Qt::LeftToRight</enum>
-        </property>
-        <property name="text">
-         <string>开启动画</string>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QCheckBox" name="is_save_checkbox">
-        <property name="font">
-         <font>
-          <family>宋体</family>
-          <pointsize>12</pointsize>
-         </font>
-        </property>
-        <property name="text">
-         <string>退出保存</string>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QCheckBox" name="checkBox_12">
-        <property name="enabled">
-         <bool>false</bool>
-        </property>
-        <property name="font">
-         <font>
-          <family>宋体</family>
-          <pointsize>12</pointsize>
-         </font>
-        </property>
-        <property name="text">
-         <string>开发中...</string>
-        </property>
-       </widget>
-      </item>
-     </layout>
-    </widget>
+    <layout class="QVBoxLayout" name="config_ui">
+     <item>
+      <layout class="QHBoxLayout" name="config_ui_1">
+       <property name="spacing">
+        <number>7</number>
+       </property>
+       <property name="sizeConstraint">
+        <enum>QLayout::SetDefaultConstraint</enum>
+       </property>
+       <property name="leftMargin">
+        <number>50</number>
+       </property>
+       <item>
+        <widget class="QCheckBox" name="n_pick_checkbox">
+         <property name="enabled">
+          <bool>false</bool>
+         </property>
+         <property name="font">
+          <font>
+           <family>宋体</family>
+           <pointsize>12</pointsize>
+          </font>
+         </property>
+         <property name="layoutDirection">
+          <enum>Qt::LeftToRight</enum>
+         </property>
+         <property name="text">
+          <string>均衡模式</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QCheckBox" name="g_names_pick_checkbox">
+         <property name="font">
+          <font>
+           <family>宋体</family>
+           <pointsize>12</pointsize>
+          </font>
+         </property>
+         <property name="text">
+          <string>只抽女生</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QCheckBox" name="b_names_pick_checkbox">
+         <property name="font">
+          <font>
+           <family>宋体</family>
+           <pointsize>12</pointsize>
+          </font>
+         </property>
+         <property name="text">
+          <string>只抽男生</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </item>
+     <item>
+      <layout class="QHBoxLayout" name="config_ui_2">
+       <property name="spacing">
+        <number>7</number>
+       </property>
+       <property name="sizeConstraint">
+        <enum>QLayout::SetDefaultConstraint</enum>
+       </property>
+       <property name="leftMargin">
+        <number>50</number>
+       </property>
+       <item>
+        <widget class="QCheckBox" name="pick_again_checkbox">
+         <property name="font">
+          <font>
+           <family>宋体</family>
+           <pointsize>12</pointsize>
+          </font>
+         </property>
+         <property name="layoutDirection">
+          <enum>Qt::LeftToRight</enum>
+         </property>
+         <property name="text">
+          <string>允许重复抽取</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QCheckBox" name="pick_time_checkbox">
+         <property name="font">
+          <font>
+           <family>宋体</family>
+           <pointsize>12</pointsize>
+          </font>
+         </property>
+         <property name="text">
+          <string>计时器</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QCheckBox" name="pick_read_checkbox">
+         <property name="font">
+          <font>
+           <family>宋体</family>
+           <pointsize>12</pointsize>
+          </font>
+         </property>
+         <property name="text">
+          <string>开启播报(测试)</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </item>
+     <item>
+      <layout class="QHBoxLayout" name="config_ui_3">
+       <property name="spacing">
+        <number>7</number>
+       </property>
+       <property name="sizeConstraint">
+        <enum>QLayout::SetDefaultConstraint</enum>
+       </property>
+       <property name="leftMargin">
+        <number>50</number>
+       </property>
+       <item>
+        <widget class="QCheckBox" name="pick_animation_checkbox">
+         <property name="font">
+          <font>
+           <family>宋体</family>
+           <pointsize>12</pointsize>
+          </font>
+         </property>
+         <property name="layoutDirection">
+          <enum>Qt::LeftToRight</enum>
+         </property>
+         <property name="text">
+          <string>开启动画</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QCheckBox" name="is_save_checkbox">
+         <property name="font">
+          <font>
+           <family>宋体</family>
+           <pointsize>12</pointsize>
+          </font>
+         </property>
+         <property name="text">
+          <string>退出保存</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QCheckBox" name="checkBox_12">
+         <property name="enabled">
+          <bool>false</bool>
+         </property>
+         <property name="font">
+          <font>
+           <family>宋体</family>
+           <pointsize>12</pointsize>
+          </font>
+         </property>
+         <property name="text">
+          <string>开发中...</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </item>
+    </layout>
    </widget>
-   <widget class="QLabel" name="timer_label">
+   <widget class="QWidget" name="verticalLayoutWidget_3">
     <property name="geometry">
      <rect>
-      <x>41</x>
-      <y>594</y>
+      <x>20</x>
+      <y>480</y>
       <width>561</width>
-      <height>41</height>
+      <height>55</height>
      </rect>
     </property>
-    <property name="font">
-     <font>
-      <family>Times New Roman</family>
-      <pointsize>28</pointsize>
-     </font>
-    </property>
-    <property name="text">
-     <string>0.0s</string>
-    </property>
-    <property name="alignment">
-     <set>Qt::AlignCenter</set>
-    </property>
+    <layout class="QVBoxLayout" name="verticalLayout">
+     <item>
+      <widget class="QLabel" name="timer_label">
+       <property name="font">
+        <font>
+         <family>Times New Roman</family>
+         <pointsize>28</pointsize>
+        </font>
+       </property>
+       <property name="text">
+        <string>0.0s</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignCenter</set>
+       </property>
+      </widget>
+     </item>
+    </layout>
    </widget>
   </widget>
   <widget class="QMenuBar" name="menubar">
@@ -788,15 +766,16 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>647</width>
+     <width>612</width>
      <height>26</height>
     </rect>
    </property>
    <widget class="QMenu" name="menu_about">
     <property name="title">
-     <string>关于</string>
+     <string>程序</string>
     </property>
     <addaction name="about_action"/>
+    <addaction name="exit_action"/>
     <addaction name="separator"/>
     <addaction name="update_action"/>
     <addaction name="github_action"/>
@@ -817,6 +796,11 @@
   <action name="github_action">
    <property name="text">
     <string>打开 Github 仓库</string>
+   </property>
+  </action>
+  <action name="exit_action">
+   <property name="text">
+    <string>退出程序</string>
    </property>
   </action>
  </widget>
