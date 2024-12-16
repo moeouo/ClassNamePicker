@@ -3,11 +3,18 @@
 <div align="center">
 
 # ClassNamePicker
-## 实用课堂工具 :airplane:  | 课堂随机点名 :zap: 
+
+![banner](./banner/screenshot.png)
 
 [![Stars](https://img.shields.io/github/stars/Chengzi600/RandomPickName?label=Stars)](https://github.com/ClassIsland/ClassIsland)
 [![Release](https://img.shields.io/github/v/release/Chengzi600/RandomPickName?style=flat-square&color=%233fb950&label=正式版)](https://github.com/ClassIsland/ClassIsland/releases/latest)
 [![下载量](https://img.shields.io/github/downloads/Chengzi600/RandomPickName/total?style=social&label=下载量&logo=github)](https://github.com/ClassIsland/ClassIsland/releases/latest)
+
+[![forks](https://img.shields.io/github/forks/Chengzi600/ClassNamePicker?style=flat&color=blue)](https://github.com/Chengzi600/ClassNamePicker/forks)
+[![Watchers](https://img.shields.io/github/watchers/Chengzi600/ClassNamePicker?style=flat&color=green)](https://github.com/Chengzi600/ClassNamePicker/watchers)
+[![GitHub Issues](https://img.shields.io/github/issues-search/Chengzi600/ClassNamePicker?query=is%3Aopen&label=issues&color=purple)](https://github.com/Chengzi600/ClassNamePicker/issues)
+
+![GitHub License](https://img.shields.io/github/license/Chengzi600/ClassNamePicker?color=red)
 
 ClassNamePicker 是一款功能强大的课堂随机点名工具<br/>
 使用 PyQt5 编写，界面简洁
@@ -93,7 +100,7 @@ ClassNamePicker 是一款功能强大的课堂随机点名工具<br/>
 
 ## 许可证
 
-本项目基于 [WTFPT License](LICENSE) 获得许可
+本项目基于 [WTFPL License](LICENSE) 获得许可
 
 ## Stars 历史
 
