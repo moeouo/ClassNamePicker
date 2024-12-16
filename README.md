@@ -93,7 +93,7 @@ ClassNamePicker 是一款功能强大的课堂随机点名工具<br/>
 
 ## 许可证
 
-本项目基于 [MIT License](LICENSE) 获得许可
+本项目基于 [WTFPT License](LICENSE) 获得许可
 
 ## Stars 历史
 
