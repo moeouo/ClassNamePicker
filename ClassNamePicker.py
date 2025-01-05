@@ -510,8 +510,11 @@ class PickName(QMainWindow, Ui_MainWindow):
             self.is_save_checkbox.stateChanged.connect(self.set_save)
 
     def say(self, text):
-        self.engine.say(text)
-        self.engine.runAndWait()
+        if text == "黄子城":
+            self.engine.say("萌城")
+        else:
+            self.engine.say(text)
+            self.engine.runAndWait()
 
 
 class RoundFloatingWindow(QWidget):
