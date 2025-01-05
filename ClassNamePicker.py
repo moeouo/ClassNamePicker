@@ -256,8 +256,7 @@ class PickName(QMainWindow, Ui_MainWindow):
         self.block_signals(True)
         if not self.pick_only_g:
             if QMessageBox.question(self, "继续吗",
-                                    "该操作将清空已抽取的名字，继续吗？\n 这次将无法再使用重复抽取功能，如有需要请重启",
-                                    "请不要点击叉号关闭窗口会导致已点名信息丢失！"
+                                    "该操作将清空已抽取的名字，继续吗？\n 这次将无法再使用重复抽取功能，如有需要请重启"
                                     QMessageBox.Yes | QMessageBox.No, QMessageBox.No) == QMessageBox.Yes:
                 self.pick_again = False
                 self.pick_again_checkbox.setCheckState(False)
@@ -276,8 +275,7 @@ class PickName(QMainWindow, Ui_MainWindow):
         self.block_signals()
         if not self.pick_only_b:
             if QMessageBox.question(self, "继续吗",
-                                    "该操作将清空已抽取的名字，继续吗？\n 这次将无法再使用重复抽取功能，如有需要请重启",
-                                    "请不要点击叉号关闭窗口会导致已点名信息丢失！"
+                                    "该操作将清空已抽取的名字，继续吗？\n 这次将无法再使用重复抽取功能，如有需要请重启"
                                     QMessageBox.Yes | QMessageBox.No, QMessageBox.No) == QMessageBox.Yes:
                 self.pick_again = False
                 self.pick_again_checkbox.setCheckState(False)
